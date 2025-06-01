@@ -15,14 +15,19 @@ async function kotobank(word) {
 
 		const explains = document.getElementsByClassName("description");
 
-		console.log("\n" + word + "\n");
+		console.log("\n" + "\x1b[1;4m" + word+ "\x1b[0m" + "\n");
 
 		for (const ex of explains) {
-			console.log("▶　" + ex.textContent + "\n");
+			const row_explain_element = ex.innerHTML;
+			const explain_element = row_explain_element.replace(/<br>/g, '\n');
+			const container_div = document.createElement("div");
+			container_div.innerHTML = explain_element;
+
+			console.log("\x1b[33m▶　\x1b[0m" + container_div.textContent.trim() + "\n");
 		}
 	} catch(e) {
-		console.error("エラー: " + e);
+		console.error("\x1b[1;31mエラー: " + e + "\x1b[0m");
 	}
 }
 
-kotobank("生")
+kotobank("うんこ")
